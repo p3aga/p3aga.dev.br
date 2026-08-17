@@ -9,9 +9,20 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "check": "astro check && biome check",
+    "check:write": "biome check --write",
+    "format": "biome format",
+    "format:write": "biome format --write",
+    "lint": "biome lint",
+    "lint:write": "biome lint --write"
   },
   "dependencies": {
     "astro": "^7.2.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.9"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
   }
 }
