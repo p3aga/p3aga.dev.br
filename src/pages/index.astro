@@ -1,17 +1,20 @@
 ---
-import "../styles/global.css";
+import { getEntry, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const entry = await getEntry("pages", "index");
+if (!entry) {
+  throw new Error("Index page not found (file: src/content/pages/index.md)");
+}
+const { Content } = await render(entry);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Sobre DevOps, Linux, Desenvolvimento e a Vida"
+  description="Artigos, tutoriais práticos de TI e de vez em quando alguns desabafos"
+  >
+  <h1>Welcome to My Astro Site</h1>
+  <article class="prose">
+    <Content />
+  </article>
+</BaseLayout>
