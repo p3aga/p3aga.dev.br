@@ -1,0 +1,17 @@
+---
+import { getEntry, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const entry = await getEntry("about", "index");
+if (!entry) {
+  throw new Error("About page not found (file: src/content/about/index.md)");
+}
+
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <article class="prose">
+    <Content />
+  </article>
+</BaseLayout>
