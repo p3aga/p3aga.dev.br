@@ -1,9 +1,20 @@
 ---
+import { Icon } from 'astro-icon/components';
 import siteConfig from "@/site.config";
 ---
 
-<footer class="mt-15 mb-5">
+<footer class="mt-15 mb-5 text-center">
   <div class="text-base font-serif text-medium">
     <small>Copyright © {siteConfig.Author.Name} {siteConfig.Author.Year}</small>
   </div>
+  <div>
+    <div class="flex items-center justify-center gap-3 mt-5 ms-2">
+      {siteConfig.UserLinks.map((link) => (
+        <a href={link.url} target="_blank" aria-label={link.type}>
+          <Icon name={`logos/${link.type}`} class=""/>
+        </a>
+      ))}
+    </div>
+  </div>
+
 </footer>
