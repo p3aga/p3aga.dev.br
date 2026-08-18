@@ -12,13 +12,12 @@ const siteConfig: SiteConfig = {
   Author: author,
   UserLinks: [
     {
-      icon: "linkedin",
+      type: "linkedin",
       url: "https://www.linkedin.com/in/p3aga",
-      alt: "LinkedIn",
     },
-    { icon: "github", url: "https://github.com/p3aga", alt: "GitHub" },
-    { icon: "codeberg", url: "https://codeberg.org/p3aga", alt: "Codeberg" },
-    { icon: "maildotru", url: `mailto:${author.Email}`, alt: "Email" },
+    { type: "github", url: "https://github.com/p3aga" },
+    { type: "codeberg", url: "https://codeberg.org/p3aga" },
+    { type: "mail", url: `mailto:${author.Email}` },
   ],
   menuLinks: [
     { path: "blog", title: "Blog" },

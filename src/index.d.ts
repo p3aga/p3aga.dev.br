@@ -4,19 +4,20 @@ interface Author {
   Year: number;
 }
 
+interface UserLink {
+  type: "linkedin" | "github" | "codeberg" | "mail" | "x" | "instagram";
+  url: string;
+}
+
 interface SiteConfig {
   Lang: string;
   SiteName: string;
   Author: Author;
-  UserLinks: Array<{
-    icon: string;
-    url: string;
-    alt: string;
-  }>;
+  UserLinks: Array<UserLink>;
   menuLinks: Array<{
     path: string;
     title: string;
   }>;
 }
 
-export type { Author, SiteConfig };
+export type { Author, UserLink, SiteConfig };
