@@ -9,6 +9,7 @@ import pagefind from "astro-pagefind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://p3aga.dev.br",
   fonts: [
     {
       provider: fontProviders.google(),
