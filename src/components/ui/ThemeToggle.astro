@@ -1,0 +1,55 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<button id="themeToggle" class="flex items-center cursor-pointer" type="button">
+  <Icon name="ui/theme-system" class="text-xl hidden" data-theme="system"/>
+  <Icon name="ui/theme-dark" class="text-xl hidden" data-theme="dark"/>
+  <Icon name="ui/theme-light" class="text-xl hidden" data-theme="light"/>
+</button>
+
+<script is:inline>
+  const handleToggleThemeSVG = ((svgList, currentTheme) => {
+    svgList.forEach(svg => {
+      if (svg.dataset.theme == currentTheme) {
+        svg.classList.remove('hidden');
+        svg.classList.add('block');
+      } else {
+        svg.classList.remove('block');
+        svg.classList.add('hidden');
+      }
+    })
+  })
+
+  const themeToggleSVGs = themeToggle.querySelectorAll('svg');
+  handleToggleThemeSVG(themeToggleSVGs, localStorage.getItem('theme') || 'system')
+
+  const handleToggleTheme = ((e) => {
+    themeToggle = e.currentTarget;
+
+    const blockTheme = Array.from(themeToggleSVGs).filter(
+      el => getComputedStyle(el).display === 'block'
+    )[0];
+
+    switch (blockTheme.dataset.theme) {
+      case 'system':
+        document.documentElement.classList.add('dark')
+        localStorage.setItem('theme', 'dark')
+        handleToggleThemeSVG(themeToggleSVGs, 'dark')
+        break;
+      case 'dark':
+        document.documentElement.classList.remove('dark')
+        localStorage.setItem('theme', 'light')
+        handleToggleThemeSVG(themeToggleSVGs, 'light')
+        break;
+      default:
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark')
+        }
+        localStorage.removeItem('theme')
+        handleToggleThemeSVG(themeToggleSVGs, 'system')
+    }
+  })
+
+  document.getElementById('themeToggle').addEventListener('click', handleToggleTheme);
+</script>
