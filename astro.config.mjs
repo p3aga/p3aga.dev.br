@@ -13,27 +13,31 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
+      name: "Playfair Display",
+      cssVariable: "--font-playfair-display",
+      weights: ["400", "700"],
+      fallbacks: ["serif"],
+    },
+    {
+      provider: fontProviders.google(),
       name: "Inter",
+      weights: ["100 900"],
       cssVariable: "--font-inter",
       fallbacks: ["sans-serif"],
     },
     {
       provider: fontProviders.google(),
-      name: "JetBrains Mono",
-      cssVariable: "--font-jetbrains-mono",
-      fallbacks: ["monospace"],
-    },
-    {
-      provider: fontProviders.google(),
-      name: "Playfair Display",
-      cssVariable: "--font-playfair-display",
-      fallbacks: ["serif"],
-    },
-    {
-      provider: fontProviders.google(),
       name: "Noto Serif",
+      weights: ["100 900"],
       cssVariable: "--font-noto-serif",
       fallbacks: ["serif"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "JetBrains Mono",
+      weights: ["100 800"],
+      cssVariable: "--font-jetbrains-mono",
+      fallbacks: ["monospace"],
     },
   ],
   vite: {
