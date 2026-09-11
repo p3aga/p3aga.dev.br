@@ -1,0 +1,255 @@
+@layer components {
+  .prose {
+    font-size: var(--text-base);
+    line-height: --spacing(7);
+    --prose-base-color: var(--color-green-900);
+    --prose-border-color: oklch(from var(--prose-base-color) l c h / 0.3);
+    --prose-li-marker-color: oklch(from var(--prose-base-color) l c h / 0.5);
+    --prose-bg-soft-color: oklch(from var(--prose-base-color) l c h / 0.1);
+
+    & :where(*):not(.not-prose, .not-prose *) {
+      &:is(h1, h2, h3, h4, h5, h6) {
+        font-family: var(--font-serif);
+      }
+
+      &:is(h1) {
+        font-size: var(--text-4xl);
+        line-height: --spacing(10);
+        margin-top: 0;
+        margin-bottom: --spacing(8);
+        font-weight: var(--font-weight-extrabold);
+
+        & strong {
+          font-weight: var(--font-weight-black);
+        }
+      }
+
+      &:is(h2) {
+        font-size: var(--text-2xl);
+        line-height: --spacing(8);
+        margin-top: --spacing(12);
+        margin-bottom: --spacing(6);
+        font-weight: var(--font-weight-bold);
+
+        & strong {
+          font-weight: var(--font-weight-extrabold);
+        }
+      }
+
+      &:is(h3) {
+        font-size: var(--text-xl);
+        line-height: --spacing(8);
+        margin-top: --spacing(8);
+        margin-bottom: --spacing(3);
+        font-weight: var(--font-weight-semibold);
+
+        & strong {
+          font-weight: var(--font-weight-bold);
+        }
+      }
+
+      &:is(h4) {
+        font-size: var(--text-base);
+        line-height: --spacing(6);
+        margin-top: --spacing(6);
+        margin-bottom: --spacing(2);
+        font-weight: var(--font-weight-semibold);
+
+        & strong {
+          font-weight: var(--font-weight-bold);
+        }
+      }
+
+      &:is(h5, h6) {
+        font-size: var(--text-base);
+        margin-top: --spacing(6);
+        margin-bottom: --spacing(2);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      &:is(p) {
+        margin-top: --spacing(5);
+        margin-bottom: --spacing(5);
+      }
+
+      &:is(hr) {
+        border-top-width: 1px;
+        opacity: 0.3;
+        margin-block: --spacing(6);
+      }
+
+      &:is(strong) {
+        font-weight: bold;
+      }
+
+      &:is(em, blockquote) {
+        font-style: italic;
+        font-family: var(--font-serif);
+      }
+
+      &:is(blockquote) {
+        padding-inline-start: --spacing(6);
+        border-left: 1px solid var(--prose-border-color);
+
+        & blockquote {
+          border: none;
+        }
+      }
+
+      &:is(ul, ol) {
+        list-style-position: inside;
+        margin-bottom: --spacing(4);
+        margin-inline-start: --spacing(2);
+
+        & :is(ul, ol) {
+          margin-bottom: 0;
+          margin-inline-start: --spacing(4);
+        }
+
+        & li p {
+          display: inline;
+        }
+
+        & li::marker {
+          color: var(--prose-li-marker-color);
+        }
+      }
+
+      &:is(ul):not(.contains-task-list) {
+        list-style-type: disc;
+      }
+
+      &:is(ol) {
+        list-style-type: decimal;
+      }
+
+      &:is(ul).contains-task-list {
+        & li {
+          display: flex;
+          align-items: center;
+        }
+
+        & input[type="checkbox"] {
+          appearance: none;
+          position: relative;
+          background-color: transparent;
+          width: --spacing(3.6);
+          height: --spacing(3.6);
+          border: 1px solid var(--prose-base-color);
+          border-radius: 2px;
+          box-sizing: border-box;
+          opacity: 0.5;
+          margin-inline-end: --spacing(2);
+
+          &:checked::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: var(--text-sm);
+          }
+        }
+      }
+
+      &:is(.table-wrapper) {
+        overflow-x: scroll;
+        scrollbar-width: none;
+
+        & table {
+          width: 100%;
+          border: 1px solid var(--prose-border-color);
+          border-radius: 4px;
+          border-collapse: separate;
+          border-spacing: 0;
+
+          & :is(th, td) {
+            border-bottom: 1px solid var(--prose-border-color);
+            border-right: 1px solid var(--prose-border-color);
+            padding: --spacing(3) --spacing(6);
+            text-align: start;
+            vertical-align: top;
+          }
+
+          & th {
+            background-color: var(--prose-bg-soft-color);
+          }
+
+          & :is(th, td):last-child {
+            border-right: none;
+          }
+
+          & tr:last-child {
+            & td {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+
+      &:is(code:not(pre code), kbd) {
+        font-family: var(--font-mono);
+        padding-inline: --spacing(1);
+        background-color: var(--prose-bg-soft-color);
+        border: 1px solid var(--prose-border-color);
+        border-radius: 4px;
+        box-sizing: border-box;
+        white-space: normal;
+
+        @media (width >=40rem) {
+          white-space: nowrap;
+        }
+      }
+
+      &:is(mark) {
+        background-color: color-mix(in oklch,
+            var(--prose-base-color),
+            transparent 80%);
+        color: var(--prose-base-color);
+        padding-inline: --spacing(1);
+        font-weight: bold;
+      }
+
+      &:is(sup) {
+        & a {
+          margin-inline-start: --spacing(0.5);
+          margin-inline-end: --spacing(1);
+          font-style: normal;
+
+          &::after {
+            content: "]";
+          }
+
+          &::before {
+            content: "[";
+          }
+        }
+      }
+
+      &:is(a) {
+        text-decoration: underline;
+        text-decoration-color: var(--prose-border-color);
+        transition: opacity 200ms;
+
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+
+      &:is(.footnotes) {
+        border-top: 1px solid var(--prose-border-color);
+        padding-top: --spacing(6);
+        margin-top: --spacing(15);
+        font-size: var(--text-sm);
+      }
+
+      &:is(.expressive-code) {
+        margin-bottom: --spacing(4);
+      }
+    }
+  }
+
+  :where(.dark) .prose {
+    --prose-base-color: var(--color-green-50);
+  }
+}
