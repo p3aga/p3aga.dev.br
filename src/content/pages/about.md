@@ -2,12 +2,116 @@
 title: Sobre mim
 description: Pedro Henrick, programador, estudante, curioso e fascinado por tecnologia.
 ---
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi est velit, dignissim sagittis bibendum et, fermentum a est. Vestibulum placerat at diam et tempor. Suspendisse potenti. Fusce nec velit ligula. Etiam consequat diam tristique, varius dui sed, rutrum lacus. Etiam eu turpis vehicula, accumsan libero sit amet, viverra magna. Donec nec quam in erat vulputate maximus id vel eros. Praesent nunc mi, commodo sit amet consectetur vitae, ornare et lorem. Nullam diam lorem, auctor lobortis tempus non, faucibus sed orci. Duis feugiat, purus et dignissim tristique, justo nunc eleifend dui, et volutpat leo eros nec arcu. Vestibulum vel suscipit erat. Pellentesque scelerisque mollis sapien, eu fringilla enim blandit ac. Morbi quis cursus erat, quis aliquet risus. Praesent euismod nec eros et varius. Donec ultricies erat at risus feugiat mollis.
 
-Vestibulum arcu augue, faucibus a ornare at, finibus vitae tortor. Nulla sit amet ligula sem. Praesent a rhoncus massa. Nunc pulvinar tortor in dapibus tincidunt. Proin lacinia bibendum enim, in tristique augue ornare quis. Phasellus eget nibh dignissim, facilisis tellus nec, gravida lectus. Aenean vehicula leo augue, id iaculis justo tristique in. Suspendisse ut lectus in dui vehicula sodales. Nunc faucibus, massa non mattis interdum, urna augue luctus tellus, quis mollis arcu orci vitae orci. Pellentesque in mattis erat, ut ultrices nibh. In ut tellus orci. Vivamus et elementum felis, eget porta nisi. In a odio in risus eleifend porttitor. Curabitur id magna pulvinar ex porttitor tristique at dignissim ligula.
+## Text Formatting
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum nulla eu justo auctor vestibulum. Morbi finibus nulla volutpat ultricies sollicitudin. Sed purus lectus, consequat vel nulla a, viverra dictum ipsum. Nulla facilisi. Mauris ullamcorper non nunc ac rhoncus. Maecenas tincidunt magna pretium risus pretium semper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam rhoncus urna id enim cursus, quis condimentum metus cursus. Vestibulum vestibulum, velit eu iaculis fringilla, leo nisi cursus sapien, ac congue dolor justo in odio.
+Markdown makes it easy to format text. You can write in **bold**, *italic*, or ~~strikethrough~~. Combine them for ***bold italic*** text. Use `inline code` for technical terms.
 
-Mauris cursus mattis metus, vitae dictum risus semper non. Sed dictum lorem libero, in dignissim est consequat sed. Duis non sapien sit amet velit mattis consequat. Duis posuere ut nisl eu auctor. Sed sapien nisl, auctor id ultricies a, vestibulum sed dolor. Praesent pretium vitae ex ut lacinia. Ut sit amet tellus non lacus rutrum vehicula. Nam ac sapien tellus. Vivamus gravida nisl elit, faucibus laoreet erat vulputate et. Ut ut euismod metus. Nunc pulvinar risus et orci porttitor, ut facilisis nibh feugiat. Phasellus odio purus, rutrum quis commodo non, tincidunt in nunc. Etiam luctus nunc ut imperdiet porta. Cras et laoreet eros.
+## Lists
 
-Curabitur velit dui, pellentesque non pellentesque quis, malesuada et libero. Quisque ullamcorper nibh ut enim tincidunt tempus et at enim. Donec faucibus justo in posuere sodales. Aenean faucibus porttitor ligula, et fermentum felis fermentum vel. Vivamus ligula mauris, sollicitudin quis justo vel, blandit fermentum lectus. Nullam sit amet velit id sapien tempus consectetur. Curabitur hendrerit faucibus mauris, ac porttitor ante ultricies non. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sodales quis urna nec maximus. Proin eu est nec felis feugiat ullamcorper eget at orci.
+Unordered lists use dashes, asterisks, or plus signs:
+
+- Import files from GitHub, Dropbox, or Google Drive
+- Export to Markdown, HTML, or PDF
+- Drag and drop files directly into the editor
+
+Ordered lists are numbered automatically:
+
+1. Write your markdown
+2. Preview the rendered output
+3. Export or save to the cloud
+
+Nested lists work too:
+
+- Cloud integrations
+  - GitHub repositories
+  - Dropbox folders
+  - Google Drive files
+  - OneDrive and Bitbucket
+- Local features
+  - Auto-save to browser storage
+  - Image paste from clipboard
+
+## Task Lists
+
+- [x] Set up the editor
+- [x] Write some markdown
+- [ ] Connect a cloud service
+- [ ] Export the finished document
+
+## Links and Images
+
+Link to any page with [inline links](https://dillinger.io) or use [reference-style links][dillinger].
+
+Images use a similar syntax:
+
+![Placeholder](https://placehold.co/600x200/2B2F36/35D7BB?text=Your+Image+Here)
+
+[dillinger]: https://dillinger.io
+
+## Blockquotes
+
+> The art of writing is the art of discovering what you believe.
+>
+> — Gustave Flaubert
+
+Blockquotes can contain other markdown elements:
+
+> **Tip:** Use `Cmd+Shift+Z` to enter zen mode for distraction-free writing.
+
+## Code
+
+Fenced code blocks support syntax highlighting:
+
+```javascript
+function greet(name) {
+  return `Hello, ${name}.`;
+}
+
+console.log(greet("world"));
+```
+
+```python
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+```
+
+## Tables
+
+| Shortcut | Action |
+|----------|--------|
+| `⌘ ⇧ Z` | Toggle zen mode |
+| `Escape` | Exit zen mode |
+| `?` | Keyboard shortcuts |
+
+Tables support alignment:
+
+| Feature | Status | Notes |
+|:--------|:------:|------:|
+| Markdown editing | Active | Monaco-powered |
+| Live preview | Active | Scroll-synced |
+| Cloud sync | Available | 5 providers |
+| PDF export | Available | Server-rendered |
+
+## Footnotes
+
+Dillinger supports extended markdown syntax including footnotes[^1] and definition lists.
+
+[^1]: Footnotes appear at the bottom of the rendered preview.
+
+## Math
+
+Inline math: $E = mc^2$
+
+Block equations:
+
+$$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$
+
+---
+
+*Your documents save automatically. Start writing.*
