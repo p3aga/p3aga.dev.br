@@ -10,11 +10,11 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout
-  title="Sobre DevOps, Linux, Desenvolvimento e a Vida"
-  description="Artigos, tutoriais práticos de TI e de vez em quando alguns desabafos"
+  title={entry.data.title}
+  description={entry.data.description}
   >
-  <h1>Welcome to My Astro Site</h1>
   <article class="prose">
+    <h1 class="sr-only">{entry.data.title}</h1>
     <Content />
   </article>
 </BaseLayout>
