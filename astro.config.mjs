@@ -1,11 +1,13 @@
 // @ts-check
-
 import mdx from "@astrojs/mdx";
+import { unified } from '@astrojs/markdown-remark';
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
+import remarkDirective from 'remark-directive';
+import rehypeTableProcessor from './src/plugins/rehype-table-processor';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,7 +17,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "Playfair Display",
       cssVariable: "--font-playfair-display",
-      weights: ["400", "700"],
+      weights: ["400", "900"],
       fallbacks: ["serif"],
     },
     {
@@ -40,6 +42,12 @@ export default defineConfig({
       fallbacks: ["monospace"],
     },
   ],
+  markdown: {
+    processor: unified({
+      remarkPlugins: [remarkDirective],
+      rehypePlugins: [rehypeTableProcessor],
+    }),
+  },
   vite: {
     plugins: [tailwindcss()],
   },
