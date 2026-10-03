@@ -1,13 +1,12 @@
 // @ts-check
 import mdx from "@astrojs/mdx";
-import { unified } from '@astrojs/markdown-remark';
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
-import remarkDirective from 'remark-directive';
-import rehypeTableProcessor from './src/plugins/rehype-table-processor';
+import { satteri } from '@astrojs/markdown-satteri';
+import hastTableWrapper from "./src/plugins/hast-table-processor";
 
 // https://astro.build/config
 export default defineConfig({
@@ -43,9 +42,12 @@ export default defineConfig({
     },
   ],
   markdown: {
-    processor: unified({
-      remarkPlugins: [remarkDirective],
-      rehypePlugins: [rehypeTableProcessor],
+    processor: satteri({
+      hastPlugins: [hastTableWrapper],
+      features: {
+        gfm: true,
+        smartPunctuation: true
+      }
     }),
   },
   vite: {
