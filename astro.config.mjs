@@ -6,6 +6,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
 import { satteri } from '@astrojs/markdown-satteri';
+import astroExpressiveCode from 'astro-expressive-code'
 import hastTableWrapper from "./src/plugins/hast-table-processor";
 
 // https://astro.build/config
@@ -53,6 +54,11 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-
-  integrations: [pagefind(), sitemap(), mdx(), icon()],
+  integrations: [
+    astroExpressiveCode(),
+    mdx(),
+    icon(),
+    pagefind(),
+    sitemap()
+  ],
 });
