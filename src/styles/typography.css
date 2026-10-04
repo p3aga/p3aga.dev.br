@@ -195,6 +195,7 @@
         border-radius: 4px;
         box-sizing: border-box;
         white-space: normal;
+        text-wrap: nowrap;
 
         @media (width >=40rem) {
           white-space: nowrap;
