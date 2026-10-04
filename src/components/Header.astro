@@ -5,12 +5,13 @@ import siteConfig from '@/site.config';
 const siteURL = Astro.site ?? new URL(Astro.url.origin);
 ---
 
-<header class="sticky top-0 z-50 w-full transition-colors duration-500 bg-green-50/30 dark:bg-green-950/30 backdrop-blur-xl">
+<header class="sticky top-0 z-50 w-full">
+  <div class="absolute inset-0 -z-10 transition-colors duration-500 bg-green-50/30 dark:bg-green-950/30 backdrop-blur-xl pointer-events-none"></div>
+
   <div class="m-auto w-auto flex justify-between py-2 my-3 px-5 sm:w-xl sm:px-0">
     <div class="flex justify-between items-center">
       <a href={siteURL} class="text-3xl font-title font-black">{siteConfig.SiteName}</a>
-      <div class="flex gap-2">
-      </div>
+      <div class="flex gap-2"></div>
     </div>
     <div class="flex items-center gap-2">
       <nav class="font-serif">
