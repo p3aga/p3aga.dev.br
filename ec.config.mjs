@@ -1,13 +1,13 @@
-import { defineEcConfig } from 'astro-expressive-code'
+import { defineEcConfig } from "astro-expressive-code";
 
 export default defineEcConfig({
-  themes: ['gruvbox-dark-medium'],
+  themes: ["gruvbox-dark-medium"],
   styleOverrides: {
-    borderRadius: '4px',
-    uiFontFamily: 'var(--font-sans), sans-serif',
-    codeFontFamily: 'var(--font-mono), monospace',
+    borderRadius: "4px",
+    uiFontFamily: "var(--font-sans), sans-serif",
+    codeFontFamily: "var(--font-mono), monospace",
     frames: {
-      frameBoxShadowCssValue: 'none',
+      frameBoxShadowCssValue: "none",
     },
   },
-})
+});

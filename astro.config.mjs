@@ -1,12 +1,13 @@
 // @ts-check
+
+import { satteri } from "@astrojs/markdown-satteri";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
+import astroExpressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
-import { satteri } from '@astrojs/markdown-satteri';
-import astroExpressiveCode from 'astro-expressive-code'
 import hastTableWrapper from "./src/plugins/hast-table-processor";
 
 // https://astro.build/config
@@ -47,18 +48,12 @@ export default defineConfig({
       hastPlugins: [hastTableWrapper],
       features: {
         gfm: true,
-        smartPunctuation: true
-      }
+        smartPunctuation: true,
+      },
     }),
   },
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [
-    astroExpressiveCode(),
-    mdx(),
-    icon(),
-    pagefind(),
-    sitemap()
-  ],
+  integrations: [astroExpressiveCode(), mdx(), icon(), pagefind(), sitemap()],
 });

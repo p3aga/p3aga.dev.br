@@ -20,4 +20,4 @@ interface SiteConfig {
   }>;
 }
 
-export type { Author, UserLink, SiteConfig };
+export type { Author, SiteConfig, UserLink };

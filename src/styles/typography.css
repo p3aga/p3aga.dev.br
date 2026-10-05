@@ -197,15 +197,17 @@
         white-space: normal;
         text-wrap: nowrap;
 
-        @media (width >=40rem) {
+        @media (width >= 40rem) {
           white-space: nowrap;
         }
       }
 
       &:is(mark) {
-        background-color: color-mix(in oklch,
-            var(--prose-base-color),
-            transparent 80%);
+        background-color: color-mix(
+          in oklch,
+          var(--prose-base-color),
+          transparent 80%
+        );
         color: var(--prose-base-color);
         padding-inline: --spacing(1);
         font-weight: bold;
