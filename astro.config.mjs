@@ -7,12 +7,17 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 import astroExpressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
-import pagefind from "astro-pagefind";
 import hastTableWrapper from "./src/plugins/hast-table-processor";
+
+
+const getSiteUrl = (() => {
+  if (process.env.NODE_ENV === "development") return "http://localhost:4321"
+  else return "https://p3aga.dev.br"
+})
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://p3aga.dev.br",
+  site: getSiteUrl(),
   fonts: [
     {
       provider: fontProviders.google(),
@@ -58,5 +63,5 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
-  integrations: [astroExpressiveCode(), mdx(), icon(), pagefind(), sitemap()],
+  integrations: [astroExpressiveCode(), mdx(), icon(), sitemap()],
 });
