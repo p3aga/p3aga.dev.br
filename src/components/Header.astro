@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from "@/components/ui/ThemeToggle.astro";
+import Search from "@/components/ui/Search.astro";
 import siteConfig from "@/site.config";
 import { Icon } from "astro-icon/components";
 
@@ -23,6 +24,7 @@ const siteURL = Astro.site ?? new URL(Astro.url.origin);
         }
       </div>
       <span class="hidden sm:block">|</span>
+      <Search />
       <ThemeToggle />
       <button id="mobileMenuBtn" type="button" class="ms-2 cursor-pointer">
         <Icon name="ui/menu" class="text-xl sm:hidden"/>

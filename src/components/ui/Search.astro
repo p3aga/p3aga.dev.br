@@ -1,0 +1,16 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<button command="show-modal" commandfor="searchDialog" class="flex items-center cursor-pointer" type="button">
+  <Icon name="ui/search" class="text-xl" />
+</button>
+<dialog id="searchDialog">
+  <p>teste</p>
+  <button type="button" command="close" commandfor="searchDialog">fechar</button>
+</dialog>
+
+<script>
+  import '@pagefind/component-ui';
+  import '@pagefind/component-ui/css';
+</script>
