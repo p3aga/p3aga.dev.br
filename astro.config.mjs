@@ -55,5 +55,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  devToolbar: {
+    enabled: false,
+  },
   integrations: [astroExpressiveCode(), mdx(), icon(), pagefind(), sitemap()],
 });
