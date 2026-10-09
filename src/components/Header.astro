@@ -1,6 +1,7 @@
 ---
 import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 import siteConfig from "@/site.config";
+import { Icon } from "astro-icon/components";
 
 const siteURL = Astro.site ?? new URL(Astro.url.origin);
 ---
@@ -13,16 +14,63 @@ const siteURL = Astro.site ?? new URL(Astro.url.origin);
       <a href={siteURL} class="text-3xl font-title font-black">{siteConfig.SiteName}</a>
       <div class="flex gap-2"></div>
     </div>
-    <div class="flex items-center gap-2">
-      <nav class="font-serif">
+    <nav class="flex items-center gap-2">
+      <div class="hidden font-serif sm:block">
         {
           siteConfig.menuLinks.map(link => (
             <a href={`${import.meta.env.BASE_URL}${link.path}`} class="px-3 box-border font-semibold">{link.title}</a>
           ))
         }
-      </nav>
-      <span>|</span>
+      </div>
+      <span class="hidden sm:block">|</span>
       <ThemeToggle />
-    </div>
+      <button id="mobileMenuBtn" type="button" class="ms-2 cursor-pointer">
+        <Icon name="ui/menu" class="text-xl sm:hidden"/>
+      </button>
+      <div id="mobileMenu" class="hidden w-screen h-screen fixed bg-green-50 text-green-900 inset-e-auto top-0 left-0 dark:bg-green-950 dark:text-green-50">
+        <div class="relative h-full flex flex-col justify-center">
+          <div class="absolute w-full top-5 text-center">
+            <span class="text-xl font-serif font-bold">Menu</span>
+          </div>
+          {
+            siteConfig.menuLinks.map(link => (
+            <a href={`${import.meta.env.BASE_URL}${link.path}`} class="text-center font-semibold py-2 cursor-pointer hover:bg-green-900 hover:text-green-50 dark:hover:bg-green-50 dark:hover:text-green-900">
+              {link.title}
+            </a>
+            ))
+          }
+          <div class="absolute w-full bottom-5 text-center">
+            <button id="mobileMenuClose" type="button" class="text-sm cursor-pointer">
+              Fechar <Icon name="ui/close" class="inline-block" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
   </div>
 </header>
+
+<script>
+  import { toggleBodyOverflowHidden, isMobile } from '@/scripts/dom.ts';
+
+  const mobileMenu = document.querySelector('#mobileMenu');
+  const mobileMenuBtn = document.querySelector('#mobileMenuBtn');
+  const mobileMenuClose = document.querySelector('#mobileMenuClose');
+
+  window.addEventListener('resize', () => {
+    if (!isMobile()) {
+      document.body.classList.remove('overflow-hidden');
+      mobileMenu?.classList.add('hidden');
+    } else if(!mobileMenu?.classList.contains('hidden')) {
+      document.body.classList.add('overflow-hidden')
+    }
+  });
+
+  [mobileMenuClose, mobileMenuBtn].forEach((btn) => {
+    btn?.addEventListener('click', () => {
+      toggleBodyOverflowHidden();
+      mobileMenu?.classList.toggle('hidden')
+    })
+  })
+
+</script>

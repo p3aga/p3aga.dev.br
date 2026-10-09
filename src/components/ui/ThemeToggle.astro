@@ -15,49 +15,60 @@ const uiIcons = [
     ))}
   </button>
   <div id="themeToggleSelect" class="hidden w-screen h-screen fixed flex flex-col justify-center bg-green-50 text-green-900 inset-e-auto top-0 left-0 sm:absolute sm:w-auto sm:h-auto sm:border sm:rounded-sm sm:inset-e-0 sm:top-auto sm:left-auto sm:mt-2 dark:bg-green-950 dark:text-green-50">
-    {uiIcons.map((icon) => (
-    <span data-theme={icon.id} class="flex items-center py-2 px-15 justify-between cursor-pointer sm:px-3 hover:bg-green-900 hover:text-green-50 dark:hover:bg-green-50 dark:hover:text-green-900">
-      {icon.label} <Icon name={`ui/theme-${icon.id}`} class="text-xl"/>
-    </span>
-    ))}
+    <div class="relative h-full flex flex-col justify-center">
+      <div class="absolute w-full top-5 text-center sm:hidden">
+        <span class="text-xl font-serif font-bold">Tema</span>
+      </div>
+      {uiIcons.map((icon) => (
+      <span data-theme={icon.id} class="py-2 cursor-pointer text-center font-semibold sm:flex sm:justify-between sm:px-3 sm:font-normal hover:bg-green-900 hover:text-green-50 dark:hover:bg-green-50 dark:hover:text-green-900">
+        {icon.label}<Icon name={`ui/theme-${icon.id}`} class="inline-block text-xl ms-3"/>
+      </span>
+      ))}
+      <div class="absolute w-full bottom-5 text-center sm:hidden">
+        <button id="themeToggleClose" type="button" class="text-sm cursor-pointer">
+          Fechar <Icon name="ui/close" class="inline-block" />
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
-<script is:inline>
-  const themeIconSVGs = themeIcon.querySelectorAll('svg');
-  const themeSelectOptions = themeToggleSelect.querySelectorAll('span')
+<script>
+  import { toggleBodyOverflowHidden, isMobile } from '@/scripts/dom.ts';
 
-  const toggleThemeSVG = ((svgList, currentTheme) => {
-    svgList.forEach(svg => {
-      if (svg.dataset.theme == currentTheme) {
+  const themeIcon = document.querySelector('#themeIcon');
+  const themeToggleSelect = document.querySelector('#themeToggleSelect');
+  const themeToggleClose = document.querySelector('#themeToggleClose');
+
+  const themeIconSVGs = themeIcon?.querySelectorAll('svg');
+  const themeSelectOptions = themeToggleSelect?.querySelectorAll('span')
+
+  const toggleThemeSVG = (
+    svgList: NodeListOf<SVGElement> | undefined,
+    currentTheme: string | null | undefined
+  ) => {
+    svgList?.forEach((svg) => {
+      if (svg.dataset.theme === currentTheme) {
         svg.classList.remove('hidden');
         svg.classList.add('block');
       } else {
         svg.classList.remove('block');
         svg.classList.add('hidden');
       }
-    })
-  })
-
-  const isMobile = (() => window.innerWidth <= 640)
-
-  const toggleBodyOverflowHidden = (() => {
-    if (isMobile()) {
-      document.body.classList.toggle('overflow-hidden')
-    }
-  });
+    });
+  };
 
   window.addEventListener('resize', () => {
     if (!isMobile()) {
       document.body.classList.remove('overflow-hidden');
-    } else if(!themeToggleSelect.classList.contains('hidden')) {
-      document.body.classList.add('overflow-hidden')
+    } else if (!themeToggleSelect?.classList.contains('hidden')) {
+      document.body.classList.add('overflow-hidden');
     }
   });
 
-  themeSelectOptions.forEach(option => {
-    option.addEventListener('click', (e) => {
-      const theme = e.currentTarget.dataset.theme;
+  themeSelectOptions?.forEach((option) => {
+    option.addEventListener('click', () => {
+      const theme = option.dataset.theme;
       toggleThemeSVG(themeIconSVGs, theme);
       switch(theme) {
         case 'dark':
@@ -79,13 +90,15 @@ const uiIcons = [
       }
 
       toggleBodyOverflowHidden();
-      themeToggleSelect.classList.toggle('hidden')
+      themeToggleSelect?.classList.toggle('hidden')
     })
   });
 
-  themeIcon.addEventListener('click', () => {
-    toggleBodyOverflowHidden();
-    themeToggleSelect.classList.toggle('hidden')
+  [themeIcon, themeToggleClose].forEach((btn) => {
+    btn?.addEventListener('click', () => {
+      toggleBodyOverflowHidden();
+      themeToggleSelect?.classList.toggle('hidden')
+    })
   })
 
   toggleThemeSVG(themeIconSVGs, localStorage.getItem('theme') || 'system')
