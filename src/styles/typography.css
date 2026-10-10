@@ -153,8 +153,9 @@
       }
 
       &:is(.table-wrapper) {
-        overflow-x: scroll;
-        scrollbar-width: none;
+        overflow-x: auto;
+        scrollbar-gutter: auto;
+        scrollbar-width: thin;
 
         & table {
           width: 100%;
