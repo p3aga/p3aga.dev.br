@@ -2,15 +2,118 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<button command="show-modal" commandfor="searchDialog" class="flex items-center cursor-pointer" type="button">
+<button id="openSearchModal" class="flex items-center cursor-pointer" type="button">
   <Icon name="ui/search" class="text-xl" />
 </button>
-<dialog id="searchDialog">
-  <p>teste</p>
-  <button type="button" command="close" commandfor="searchDialog">fechar</button>
+<dialog id="searchModal" class="m-auto mt-8 w-full max-h-[80dvh] overflow-hidden rounded-md bg-green-50 text-green-900 open:flex open:flex-col focus:outline-hidden backdrop:bg-gray-600/50 sm:w-lg">
+  <div class="flex items-center relative shrink-0">
+    <label for="searchInput" class="absolute left-2 cursor-pointer">
+      <Icon name="ui/search" class="text-2xl" />
+    </label>
+    <input id="searchInput" placeholder="Pesquisar..." type="text" class="text-2xl align-baseline w-full px-10 py-2 focus:outline-hidden">
+    <button id="closeSearchModal" type="button" class="absolute right-2">
+      <Icon name="ui/close" class="text-2xl cursor-pointer" />
+    </button>
+  </div>
+  <div id="searchResults" class="flex-1 min-h-0 overflow-y-auto scrollbar-thin"></div>
+
+  <template id="searchResultItemTemplate">
+    <li>
+      <a class="result-link block mx-2 py-2 px-3 border border-green-900/30 rounded hover:bg-green-900/30" onclick="searchModal.close()">
+        <h3 class="result-title font-bold text-base"></h3>
+        <p class="result-excerpt text-xs line-clamp-2"></p>
+      </a>
+    </li>
+  </template>
 </dialog>
 
+<style is:global>
+  .result-excerpt > mark {
+    background-color: transparent;
+    font-weight: var(--font-weight-semibold);
+  }
+</style>
+
 <script>
-  import '@pagefind/component-ui';
-  import '@pagefind/component-ui/css';
+  import { toggleBodyOverflowHidden } from '@/scripts/dom.ts';
+
+  const pagefindPath = "/pagefind/pagefind.js";
+  const pagefind = await import(/* @vite-ignore */ pagefindPath);
+
+  const openSearchModal = document.querySelector('#openSearchModal');
+  const closeSearchModal = document.querySelector('#closeSearchModal');
+  const searchModal = document.querySelector('#searchModal');
+  const searchInput = document.querySelector('#searchInput');
+  const searchResults = document.querySelector('#searchResults');
+  const template = document.querySelector('#searchResultItemTemplate');
+
+  const renderResults = (results: any[]) => {
+    if (!searchResults || !template) return;
+    searchResults.replaceChildren();
+
+    const fragment = document.createDocumentFragment();
+    const ul = document.createElement("ul");
+    ul.className = "flex flex-col gap-2 my-2";
+
+    let totalItems = 0;
+
+    results.forEach((result) => {
+      const pageTitle = result.meta.title;
+
+      result.sub_results.forEach((subResult: any) => {
+        totalItems++;
+
+        const clone = template.content.cloneNode(true) as DocumentFragment;
+        const link = clone.querySelector(".result-link") as HTMLAnchorElement | null;
+        const title = clone.querySelector(".result-title");
+        const excerpt = clone.querySelector(".result-excerpt");
+
+        if (link) link.href = subResult.url;
+        if (title) title.textContent = `${pageTitle} > ${subResult.title}`;
+        if (excerpt) excerpt.innerHTML = subResult.excerpt;
+
+        ul.appendChild(clone);
+      });
+    });
+
+    if (totalItems === 0) {
+      const empty = document.createElement("p");
+      empty.className = "text-sm mx-2 p-2";
+      empty.textContent = "Nenhum resultado encontrado.";
+      searchResults.appendChild(empty);
+      return;
+    }
+
+    fragment.appendChild(ul);
+    searchResults.appendChild(fragment);
+  };
+
+  openSearchModal?.addEventListener('click', () => {
+    toggleBodyOverflowHidden();
+    searchModal?.showModal();
+    searchInput?.focus();
+  });
+
+  closeSearchModal.addEventListener('click', () => {
+    searchModal?.close();
+  });
+
+  searchModal?.addEventListener('close', () => {
+    toggleBodyOverflowHidden();
+  });
+
+  searchInput?.addEventListener("input", async (e) => {
+    const target = e.target as HTMLInputElement;
+    const query = target.value.trim();
+
+    if (!query) {
+      searchResults?.replaceChildren();
+      return;
+    }
+
+    const search = await pagefind.debouncedSearch(query, 300);
+    if (search === null) return;
+    const results = await Promise.all(search.results.map((r: any) => r.data()))
+    renderResults(results);
+  });
 </script>
