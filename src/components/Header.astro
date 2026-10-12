@@ -1,8 +1,8 @@
 ---
-import ThemeToggle from "@/components/ui/ThemeToggle.astro";
-import Search from "@/components/ui/Search.astro";
-import siteConfig from "@/site.config";
 import { Icon } from "astro-icon/components";
+import Search from "@/components/ui/Search.astro";
+import ThemeToggle from "@/components/ui/ThemeToggle.astro";
+import siteConfig from "@/site.config";
 
 const siteURL = Astro.site ?? new URL(Astro.url.origin);
 ---
@@ -16,18 +16,18 @@ const siteURL = Astro.site ?? new URL(Astro.url.origin);
       <div class="flex gap-2"></div>
     </div>
     <nav class="flex items-center gap-2">
-      <div class="hidden font-serif sm:block">
+      <div class="hidden font-serif space-x-4 sm:block">
         {
           siteConfig.menuLinks.map(link => (
-            <a href={`${import.meta.env.BASE_URL}${link.path}`} class="px-3 box-border font-semibold">{link.title}</a>
+            <a href={`${import.meta.env.BASE_URL}${link.path}`} class="box-border font-semibold">{link.title}</a>
           ))
         }
       </div>
-      <span class="hidden sm:block">|</span>
+      <span class="hidden mx-1 sm:block">|</span>
       <Search />
       <ThemeToggle />
-      <button id="mobileMenuBtn" type="button" class="ms-2 cursor-pointer">
-        <Icon name="ui/menu" class="text-xl sm:hidden"/>
+      <button id="mobileMenuBtn" type="button" class="cursor-pointer sm:hidden">
+        <Icon name="ui/menu" class="text-xl"/>
       </button>
       <div id="mobileMenu" class="hidden w-screen h-screen fixed bg-green-50 text-green-900 inset-e-auto top-0 left-0 dark:bg-green-950 dark:text-green-50">
         <div class="relative h-full flex flex-col justify-center">

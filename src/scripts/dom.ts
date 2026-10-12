@@ -1,9 +1,9 @@
-const isMobile = (() => window.innerWidth <= 640)
+const isMobile = () => window.innerWidth <= 640;
 
-const toggleBodyOverflowHidden = (() => {
+const toggleBodyOverflowHidden = () => {
   if (isMobile()) {
-    document.body.classList.toggle('overflow-hidden')
+    document.body.classList.toggle("overflow-hidden");
   }
-});
+};
 
 export { isMobile, toggleBodyOverflowHidden };

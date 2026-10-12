@@ -249,6 +249,11 @@
 
       &:is(.expressive-code) {
         margin-bottom: --spacing(4);
+
+        & pre {
+          /* biome-ignore lint/complexity/noImportantStyles: sobrescreve tema externo */
+          scrollbar-width: thin !important;
+        }
       }
     }
   }

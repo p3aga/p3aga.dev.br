@@ -9,11 +9,10 @@ import astroExpressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import hastTableWrapper from "./src/plugins/hast-table-processor";
 
-
-const getSiteUrl = (() => {
-  if (process.env.NODE_ENV === "development") return "http://localhost:4321"
-  else return "https://p3aga.dev.br"
-})
+const getSiteUrl = () => {
+  if (process.env.NODE_ENV === "development") return "http://localhost:4321";
+  else return "https://p3aga.dev.br";
+};
 
 // https://astro.build/config
 export default defineConfig({
