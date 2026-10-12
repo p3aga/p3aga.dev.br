@@ -153,8 +153,9 @@
       }
 
       &:is(.table-wrapper) {
-        overflow-x: scroll;
-        scrollbar-width: none;
+        overflow-x: auto;
+        scrollbar-gutter: auto;
+        scrollbar-width: thin;
 
         & table {
           width: 100%;
@@ -248,6 +249,11 @@
 
       &:is(.expressive-code) {
         margin-bottom: --spacing(4);
+
+        & pre {
+          /* biome-ignore lint/complexity/noImportantStyles: sobrescreve tema externo */
+          scrollbar-width: thin !important;
+        }
       }
     }
   }

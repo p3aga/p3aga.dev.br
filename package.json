@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "postbuild": "pagefind --site dist",
     "preview": "astro preview",
     "check": "astro check && biome check",
     "check:write": "biome check --write",
@@ -21,11 +22,12 @@
     "@astrojs/markdown-satteri": "^0.4.2",
     "@astrojs/mdx": "^8.0.2",
     "@astrojs/sitemap": "^3.7.4",
+    "@pagefind/component-ui": "^1.5.2",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.5",
     "astro-expressive-code": "^0.44.2",
     "astro-icon": "^1.1.5",
-    "astro-pagefind": "^2.0.1",
+    "pagefind": "^1.5.2",
     "satteri": "^0.10.5",
     "tailwindcss": "^4.3.3"
   },

@@ -13,7 +13,10 @@ interface Props extends HeadProps {}
 const props = Astro.props;
 ---
 
-<html lang={siteConfig.Lang} class="scroll-smooth">
+<html
+  lang={siteConfig.Lang}
+  class="scroll-smooth scrollbar-thin scrollbar-track-green-50 scrollbar-thumb-green-900 dark:scrollbar-track-green-950 dark:scrollbar-thumb-green-50"
+>
 	<head>
     <BaseHead {...props} />
     <Font cssVariable="--font-inter" preload />
