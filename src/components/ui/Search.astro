@@ -5,7 +5,7 @@ import { Icon } from "astro-icon/components";
 <button id="openSearchModal" class="flex items-center cursor-pointer" type="button">
   <Icon name="ui/search" class="text-xl" />
 </button>
-<dialog id="searchModal" class="m-auto mt-8 w-full max-h-[80dvh] overflow-hidden rounded-md bg-green-50 text-green-900 open:flex open:flex-col focus:outline-hidden backdrop:bg-gray-900/50 sm:w-lg dark:bg-gray-900 dark:text-gray-50">
+<dialog id="searchModal" class="m-auto mt-8 w-full max-h-[80dvh] overflow-hidden rounded-md bg-green-50 text-green-900 open:flex open:flex-col focus:outline-hidden backdrop:bg-neutral-900/50 sm:w-lg dark:bg-neutral-800 dark:text-neutral-50">
   <div class="flex items-center relative shrink-0">
     <label for="searchInput" class="absolute left-2 cursor-pointer">
       <Icon name="ui/search" class="text-2xl" />
@@ -24,7 +24,7 @@ import { Icon } from "astro-icon/components";
 
   <template id="searchResultItemTemplate">
     <li>
-      <a class="result-link block mx-2 py-2 px-3 border border-green-900/30 rounded hover:bg-green-900/10 dark:border-gray-50/15 dark:hover:bg-gray-50/5">
+      <a class="result-link block mx-2 py-2 px-3 border border-green-900/30 rounded hover:bg-green-900/10 dark:border-neutral-50/15 dark:hover:bg-neutral-50/5">
         <h3 class="result-title font-bold text-base"></h3>
         <p class="result-excerpt text-xs line-clamp-2"></p>
       </a>
@@ -34,7 +34,7 @@ import { Icon } from "astro-icon/components";
 
 <style is:global>
   #searchModal {
-    box-shadow: 0px 0px 5px var(--color-gray-950);
+    box-shadow: 0px 0px 5px var(--color-neutral-950);
   }
 
   .result-excerpt > mark {
@@ -44,7 +44,7 @@ import { Icon } from "astro-icon/components";
   }
 
   :where(.dark) .result-excerpt > mark {
-    color: var(--color-gray-50);
+    color: var(--color-neutral-50);
   }
 
   .result-link.active {
@@ -53,8 +53,8 @@ import { Icon } from "astro-icon/components";
   }
 
   :where(.dark) .result-link.active {
-    background-color: color-mix(in srgb, var(--color-gray-50) 10%, transparent);
-    outline: 1px solid var(--color-gray-50);
+    background-color: color-mix(in srgb, var(--color-neutral-50) 10%, transparent);
+    outline: 1px solid var(--color-neutral-50);
   }
 
   #searchKeys code {
@@ -69,8 +69,8 @@ import { Icon } from "astro-icon/components";
   }
 
   :where(.dark) #searchKeys code {
-    background-color: color-mix(in srgb, var(--color-gray-50) 10%, transparent);
-    border: 1px solid var(--color-gray-50);
+    background-color: color-mix(in srgb, var(--color-neutral-50) 10%, transparent);
+    border: 1px solid var(--color-neutral-50);
   }
 </style>
 
