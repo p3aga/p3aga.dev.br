@@ -16,7 +16,7 @@ import { Icon } from "astro-icon/components";
     </button>
   </div>
   <div id="searchResults" class="flex-1 min-h-0 overflow-y-auto scrollbar-thin"></div>
-  <div id="searchKeys" class="text-xs space-x-1 m-2">
+  <div id="searchKeys" class="hidden text-xs space-x-1 m-2">
     <span><code>↓</code><code>↑</code>Navegar</span>
     <span><code>↲</code>Selecionar</span>
     <span><code>esc</code>Fechar</span>
@@ -75,13 +75,14 @@ import { Icon } from "astro-icon/components";
 </style>
 
 <script>
-  import { toggleBodyOverflowHidden } from '@/scripts/dom.ts';
+  import { isMobile } from "@/scripts/dom";
 
   const openSearchModal = document.querySelector('#openSearchModal');
   const closeSearchModal = document.querySelector('#closeSearchModal');
   const searchModal = document.querySelector<HTMLDialogElement>('#searchModal');
   const searchInput = document.querySelector<HTMLInputElement>('#searchInput');
   const searchResults = document.querySelector('#searchResults');
+  const searchKeys = document.querySelector('#searchKeys');
   const template = document.querySelector<HTMLTemplateElement>('#searchResultItemTemplate');
 
   let selectedIndex = -1;
@@ -110,7 +111,7 @@ import { Icon } from "astro-icon/components";
   }
 
   const openModal = () => {
-    toggleBodyOverflowHidden();
+    document.body.classList.toggle("overflow-hidden");
     searchModal?.showModal();
     searchInput?.focus();
   }
@@ -153,11 +154,12 @@ import { Icon } from "astro-icon/components";
   });
 
   if (process.env.NODE_ENV === "production") {
-    const pagefindPath = "/pagefind/pagefind.js";
-    const pagefind = await import(/* @vite-ignore */ pagefindPath);
+    const dynamicImport = new Function('url', 'return import(url)');
+    const pagefind = await dynamicImport('/pagefind/pagefind.js');
 
     searchModal?.addEventListener('close', () => {
-      toggleBodyOverflowHidden();
+      document.body.classList.toggle("overflow-hidden");
+      searchKeys?.classList.add('hidden');
     });
 
     const renderResults = (results: any[]) => {
@@ -221,6 +223,19 @@ import { Icon } from "astro-icon/components";
       }
       const results = await Promise.all(search.results.map((r: any) => r.data()))
       renderResults(results);
+
+      if (!isMobile()) {
+        searchKeys?.classList.remove('hidden');
+      }
+    });
+
+
+    window.addEventListener('resize', () => {
+      if (!isMobile()) {
+        searchKeys?.classList.remove('hidden');
+      } else {
+        searchKeys?.classList.add('hidden');
+      }
     });
   }
 </script>
