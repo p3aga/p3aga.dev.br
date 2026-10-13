@@ -20,7 +20,7 @@ const uiIcons = [
         <span class="text-xl font-serif font-bold">Tema</span>
       </div>
       {uiIcons.map((icon) => (
-      <span data-theme={icon.id} class="py-2 cursor-pointer text-center font-semibold sm:flex sm:justify-between sm:px-3 sm:font-normal hover:bg-green-900 hover:text-green-50 dark:hover:bg-green-50 dark:hover:text-green-900">
+      <span data-theme={icon.id} class="flex justify-center items-center py-2 cursor-pointer text-center font-semibold sm:justify-between sm:px-3 sm:font-normal hover:bg-green-900 hover:text-green-50 dark:hover:bg-green-50 dark:hover:text-green-900">
         {icon.label}<Icon name={`ui/theme-${icon.id}`} class="inline-block text-xl ms-3"/>
       </span>
       ))}
