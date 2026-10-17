@@ -16,11 +16,9 @@
     "format": "biome format",
     "format:write": "biome format --write",
     "lint": "biome lint",
-    "lint:write": "biome lint --write",
-    "generate-types": "wrangler types"
+    "lint:write": "biome lint --write"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^14.4.0",
     "@astrojs/markdown-satteri": "^0.4.2",
     "@astrojs/mdx": "^8.0.2",
     "@astrojs/sitemap": "^3.7.4",
@@ -30,8 +28,7 @@
     "astro-icon": "^1.1.5",
     "pagefind": "^1.5.2",
     "satteri": "^0.10.5",
-    "tailwindcss": "^4.3.3",
-    "wrangler": "^4.151.1"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
