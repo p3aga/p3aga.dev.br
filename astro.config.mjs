@@ -9,6 +9,8 @@ import astroExpressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import hastTableWrapper from "./src/plugins/hast-table-processor";
 
+import cloudflare from "@astrojs/cloudflare";
+
 const getSiteUrl = () => {
   if (process.env.NODE_ENV === "development") return "http://localhost:4321";
   else return "https://p3aga.dev.br";
@@ -17,6 +19,7 @@ const getSiteUrl = () => {
 // https://astro.build/config
 export default defineConfig({
   site: getSiteUrl(),
+
   fonts: [
     {
       provider: fontProviders.google(),
@@ -47,6 +50,7 @@ export default defineConfig({
       fallbacks: ["monospace"],
     },
   ],
+
   markdown: {
     processor: satteri({
       hastPlugins: [hastTableWrapper],
@@ -56,11 +60,15 @@ export default defineConfig({
       },
     }),
   },
+
   vite: {
     plugins: [tailwindcss()],
   },
+
   devToolbar: {
     enabled: false,
   },
+
   integrations: [astroExpressiveCode(), mdx(), icon(), sitemap()],
+  adapter: cloudflare()
 });
