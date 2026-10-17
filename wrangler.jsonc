@@ -1,0 +1,6 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "p3aga-dev-br",
+  "compatibility_date": "2026-10-17",
+  "pages_build_output_dir": "./dist",
+}

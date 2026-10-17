@@ -62,5 +62,6 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
+  output: "static",
   integrations: [astroExpressiveCode(), mdx(), icon(), sitemap()],
 });
