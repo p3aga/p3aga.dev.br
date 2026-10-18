@@ -29,7 +29,7 @@ const siteURL = Astro.site ?? new URL(Astro.url.origin);
       <button id="mobileMenuBtn" type="button" class="cursor-pointer sm:hidden">
         <Icon name="ui/menu" class="text-xl"/>
       </button>
-      <div id="mobileMenu" class="hidden w-screen h-screen fixed bg-green-50 text-green-900 inset-e-auto top-0 left-0 dark:bg-green-950 dark:text-green-50">
+      <div id="mobileMenu" class="hidden fixed bg-green-50 text-green-900 inset-0 dark:bg-green-950 dark:text-green-50">
         <div class="relative h-full flex flex-col justify-center">
           <div class="absolute w-full top-5 text-center">
             <span class="text-xl font-serif font-bold">Menu</span>
