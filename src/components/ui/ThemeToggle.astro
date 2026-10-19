@@ -2,16 +2,16 @@
 import { Icon } from "astro-icon/components";
 
 const uiIcons = [
-  { id: "system", label: "Sistema" },
-  { id: "dark", label: "Escuro" },
-  { id: "light", label: "Claro" },
+  { id: "system", label: "Sistema", name: "sun-moon" },
+  { id: "dark", label: "Escuro", name: "moon" },
+  { id: "light", label: "Claro", name: "sun" },
 ];
 ---
 
 <div class="static sm:relative">
   <button id="themeIcon" class="flex items-center cursor-pointer" type="button">
     {uiIcons.map((icon) => (
-      <Icon name={`ui/theme-${icon.id}`} class="text-xl hidden" data-theme={icon.id}/>
+      <Icon name={`ui/${icon.name}`} class="text-xl hidden" data-theme={icon.id}/>
     ))}
   </button>
   <div id="themeToggleSelect" class="hidden overflow-hidden fixed flex flex-col justify-center bg-green-50 text-green-900 inset-0 dark:bg-green-950 dark:text-green-50 sm:absolute sm:w-auto sm:h-auto sm:rounded-md sm:inset-e-0 sm:top-auto sm:left-auto sm:mt-2 sm:dark:bg-green-900 sm:inset-auto">
@@ -21,12 +21,12 @@ const uiIcons = [
       </div>
       {uiIcons.map((icon) => (
       <span data-theme={icon.id} class="flex justify-center items-center py-2 cursor-pointer text-center font-semibold sm:justify-between sm:px-3 sm:font-normal hover:bg-green-900 hover:text-green-50 dark:hover:bg-green-50 dark:hover:text-green-900">
-        {icon.label}<Icon name={`ui/theme-${icon.id}`} class="inline-block text-xl ms-3"/>
+        {icon.label}<Icon name={`ui/${icon.name}`} class="inline-block text-xl ms-3"/>
       </span>
       ))}
       <div class="absolute w-full bottom-5 text-center sm:hidden">
         <button id="themeToggleClose" type="button" class="text-sm cursor-pointer">
-          Fechar <Icon name="ui/close" class="inline-block" />
+          Fechar <Icon name="ui/x" class="inline-block" />
         </button>
       </div>
     </div>
