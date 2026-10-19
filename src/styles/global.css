@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "satteri-callouts/theme/obsidian";
 @import "./typography.css";
 
 @custom-variant dark (&:where(.dark, .dark *));

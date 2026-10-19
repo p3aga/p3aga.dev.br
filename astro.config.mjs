@@ -7,7 +7,11 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 import astroExpressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
-import hastTableWrapper from "./src/plugins/hast-table-processor";
+import satteriAutolinkHeadings from "satteri-autolink-headings";
+import satteriCallouts from "satteri-callouts";
+import imgAttr from "satteri-imgattr";
+import satteriKatex from "satteri-katex";
+import satteriTableWrapper from "@/plugins/satteri-table-processor";
 
 const getSiteUrl = () => {
   if (process.env.NODE_ENV === "development") return "http://localhost:4321";
@@ -49,10 +53,17 @@ export default defineConfig({
   ],
   markdown: {
     processor: satteri({
-      hastPlugins: [hastTableWrapper],
+      hastPlugins: [
+        satteriTableWrapper,
+        imgAttr(),
+        satteriCallouts(),
+        satteriAutolinkHeadings(),
+      ],
+      mdastPlugins: [satteriKatex()],
       features: {
         gfm: true,
         smartPunctuation: true,
+        math: true,
       },
     }),
   },

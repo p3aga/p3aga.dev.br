@@ -1,6 +1,6 @@
 import { defineHastPlugin } from "satteri";
 
-const hastTableWrapper = defineHastPlugin({
+const satteriTableWrapper = defineHastPlugin({
   name: "hast-table-wrapper",
   element: {
     filter: ["table"],
@@ -17,4 +17,4 @@ const hastTableWrapper = defineHastPlugin({
   },
 });
 
-export default hastTableWrapper;
+export default satteriTableWrapper;
