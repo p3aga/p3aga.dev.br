@@ -1,0 +1,33 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  tags: {
+    name: string;
+    postCount: number;
+  }[];
+}
+
+const { tags } = Astro.props;
+---
+
+<div class="pb-3">
+  <h2 class="text-lg font-serif font-extrabold">Principais tags</h2>
+</div>
+<div>
+  <ul>
+    {tags.map(tag => (
+      <li class="mb-1 cursor-pointer">
+        <a href={`/tags/${tag.name}/`}>
+          <b class="font-serif font-semibold me-1">#{tag.name}</b>
+          <span class="opacity-50 italic text-xs">{tag.postCount} posts</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+<div class="pt-1">
+  <a href="/tags" class="font-serif text-sm font-base italic">
+    Ver todas as tags <Icon name="ui/arrow-right" class="inline-block" />
+  </a>
+</div>

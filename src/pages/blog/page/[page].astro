@@ -1,10 +1,11 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
+import { getOrderedBlogPosts, getMoreTags } from "@/scripts/blog";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import PageToggle from "@/components/ui/PageToggle.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getOrderedBlogPosts } from "@/scripts/blog";
+import MoreTags from "@/components/blog/MoreTags.astro";
 import siteConfig from "@/site.config";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
@@ -20,6 +21,8 @@ export interface Props {
 }
 
 const { page } = Astro.props;
+
+const tags = await getMoreTags();
 ---
 
 <BaseLayout title="Posts" description={`${siteConfig.SiteName} Blog posts - page ${page.currentPage}`}>
@@ -32,4 +35,7 @@ const { page } = Astro.props;
     </div>
     <PageToggle page={ page } />
   </section>
+  <div slot="aside-right" class="sticky top-16"><MoreTags tags={tags} /></div>
+  <hr class="block opacity-30 my-6 lg:hidden">
+  <div class="block lg:hidden"><MoreTags tags={tags} /></div>
 </BaseLayout>
