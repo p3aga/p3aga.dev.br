@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
+import Toc from "@/components/ui/Toc.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getBlogPosts } from "@/scripts/blog";
 
@@ -18,7 +19,7 @@ export interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
@@ -31,4 +32,5 @@ const { Content } = await render(post);
     </div>
     <Content />
   </article>
+  <div slot="aside-right" class="sticky top-14"><Toc headings={headings} /></div>
 </BaseLayout>

@@ -1,0 +1,175 @@
+---
+import type { MarkdownHeading } from "astro";
+
+export interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+const depthMarginMap: Record<number, string> = {
+  2: "ms-0",
+  3: "ms-4",
+};
+
+const h = headings.map((heading) => {
+  return {
+    ...heading,
+    marginClass: depthMarginMap[heading.depth] ?? depthMarginMap[3],
+  };
+});
+---
+
+{h.length > 0 && (
+  <div class="pb-1">
+    <h2 class="text-lg font-serif font-extrabold">Tabela de Conteúdos</h2>
+  </div>
+  <div class="ms-4">
+    <ul>
+      {h.map(heading => (
+        <li>
+          <a
+            href={`#${heading.slug}`}
+            data-slug={heading.slug}
+            class:list={[
+              'toc-link',
+              'text-xs',
+              'font-semibold',
+              'cursor-pointer',
+              'opacity-40',
+              'hover:opacity-100',
+              'transition-opacity',
+              'duration-250',
+              heading.marginClass
+            ]}
+          >{heading.text}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<script>
+function setupTocObserver() {
+  const tocLinks = document.querySelectorAll<HTMLAnchorElement>(".toc-link");
+  if (!tocLinks.length) return;
+
+  const slugs = Array.from(tocLinks).map((link) => link.dataset.slug);
+  const targetHeadings = slugs
+    .map((slug) => (slug ? document.getElementById(slug) : null))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (!targetHeadings.length) return;
+
+  // Conjunto de classes por estado
+  const edgeClasses = ["opacity-70"]; // Faixas de 20% do topo e base
+  const centerZoneClasses = ["opacity-100"]; // Faixa central de 60%
+  const activeFocusClasses = ["font-extrabold"]; // Mais próximo do centro exato
+
+  const allStateClasses = [
+    ...edgeClasses,
+    ...centerZoneClasses,
+    ...activeFocusClasses,
+  ];
+
+  const visibleElements = new Set<HTMLElement>();
+  let ticking = false;
+
+  function updateHighlights() {
+    if (visibleElements.size === 0) {
+      tocLinks.forEach((link) => link.classList.remove(...allStateClasses));
+      return;
+    }
+
+    const vh = window.innerHeight;
+    const centerY = vh / 2;
+
+    // Guarda o estado de cada heading identificado por slug: 'edge' | 'center'
+    const headingZoneMap = new Map<string, "edge" | "center">();
+
+    let closestHeading: HTMLElement | null = null;
+    let minDistance = Infinity;
+
+    visibleElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const elementCenter = rect.top + rect.height / 2;
+
+      // Proporção vertical na janela (de 0.0 a 1.0)
+      const relativePos = elementCenter / vh;
+
+      // Define se está na borda (<= 20% ou >= 80%) ou na faixa central de 60%
+      if (relativePos < 0.2 || relativePos > 0.8) {
+        headingZoneMap.set(el.id, "edge");
+      } else {
+        headingZoneMap.set(el.id, "center");
+      }
+
+      // Mede proximidade da linha central absoluta
+      const distance = Math.abs(centerY - elementCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestHeading = el;
+      }
+    });
+
+    // Atualiza classes nos links da TOC
+    tocLinks.forEach((link) => {
+      const slug = link.dataset.slug;
+      if (!slug) return;
+
+      const zone = headingZoneMap.get(slug);
+      const isClosest = closestHeading && closestHeading.id === slug;
+
+      // Limpa classes dinâmicas antes de reaplicar o estado atual
+      link.classList.remove(...allStateClasses);
+
+      if (zone === "edge") {
+        link.classList.add(...edgeClasses);
+      } else if (zone === "center") {
+        link.classList.add(...centerZoneClasses);
+      }
+
+      // Se for o mais próximo do centro exato, aplica o destaque prioritário
+      if (isClosest) {
+        link.classList.add(...activeFocusClasses);
+      }
+    });
+  }
+
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateHighlights();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const target = entry.target as HTMLElement;
+        if (entry.isIntersecting) {
+          visibleElements.add(target);
+        } else {
+          visibleElements.delete(target);
+        }
+      });
+      requestTick();
+    },
+    {
+      rootMargin: "0px",
+      threshold: 0,
+    }
+  );
+
+  targetHeadings.forEach((heading) => observer.observe(heading));
+
+  // O scroll recalcula as faixas (20% / 60% / 20%) mesmo para elementos que continuam visíveis
+  window.addEventListener("scroll", requestTick, { passive: true });
+  window.addEventListener("resize", requestTick, { passive: true });
+}
+
+setupTocObserver();
+</script>
