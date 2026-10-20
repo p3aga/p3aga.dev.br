@@ -2,5 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "p3aga-dev-br",
   "compatibility_date": "2026-10-17",
-  "pages_build_output_dir": "./dist"
+  "pages_build_output_dir": "./dist",
+  "vars": {
+    "NODE_VERSION": "24",
+    "PNPM_VERSION": "12"
+  }
 }
