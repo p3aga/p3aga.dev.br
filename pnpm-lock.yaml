@@ -187,22 +187,19 @@ importers:
       astro-icon:
         specifier: ^1.1.5
         version: 1.2.0
+      katex:
+        specifier: ^0.19.0
+        version: 0.19.0
       pagefind:
         specifier: ^1.5.2
         version: 1.5.2
       satteri:
         specifier: ^0.10.5
         version: 0.10.5
-      satteri-autolink-headings:
-        specifier: ^0.1.1
-        version: 0.1.1(satteri@0.10.5)
       satteri-callouts:
         specifier: ^1.0.1
         version: 1.0.1(satteri@0.10.5)
       satteri-imgattr:
-        specifier: ^0.1.1
-        version: 0.1.1(satteri@0.10.5)
-      satteri-katex:
         specifier: ^0.1.1
         version: 0.1.1(satteri@0.10.5)
       tailwindcss:
@@ -218,6 +215,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.5.9
         version: 2.5.9
+      '@types/katex':
+        specifier: ^0.16.8
+        version: 0.16.8
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -1336,6 +1336,9 @@ packages:
   '@types/hast@3.0.5':
     resolution: {integrity: sha512-rp/ezSWaD1m44dPKICGhiskI13nVr7qTloFwDa/IYkhhf5nzwP+zIQcIJh3WIFSBOy/H1PzB40jPjMDksN4F+g==}
 
+  '@types/katex@0.16.8':
+    resolution: {integrity: sha512-trgaNyfU+Xh2Tc+ABIb44a5AYUpicB3uwirOioeOkNPPbmgRNtcWyDeeFRzjPZENO9Vq8gvVqfhaaXWLlevVwg==}
+
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
@@ -1501,9 +1504,9 @@ packages:
     resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
     engines: {node: '>=16'}
 
-  commander@8.3.0:
-    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
-    engines: {node: '>= 12'}
+  commander@15.0.0:
+    resolution: {integrity: sha512-z67u4ZhzCL/Tydu1lJARtEZYWbWaN7oYLHbsuzocr6y4N6WZAagG3RQ4FW61V1/0+jImpj293XfrcYnd1qxtPg==}
+    engines: {node: '>=22.12.0'}
 
   common-ancestor-path@2.0.0:
     resolution: {integrity: sha512-dnN3ibLeoRf2HNC+OlCiNc5d2zxbLJXOtiZUudNFSXZrNSydxcCsSpRzXwfu7BBWCIfHPw+xTayeBvJCP/D8Ng==}
@@ -1775,8 +1778,8 @@ packages:
   jsonc-parser@3.3.1:
     resolution: {integrity: sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ==}
 
-  katex@0.16.47:
-    resolution: {integrity: sha512-Eeo8Ys1doU1z+x8AZsPpQu+p/QcZBI5PeOo7QGQdy2x2m0MU/hYagBbGOmXwr5KVbEfVuWv9LpnQWeehogurjg==}
+  katex@0.19.0:
+    resolution: {integrity: sha512-v6Tznz3zJ7u3niRCoDTsumM2+HA2XXcCu+WAacCeHD2z3p9A9Ks987o5FzfTGBN0e8A0vjEgIDvLbICrXpdw/Q==}
     hasBin: true
 
   kleur@4.1.5:
@@ -2153,12 +2156,6 @@ packages:
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
-  satteri-autolink-headings@0.1.1:
-    resolution: {integrity: sha512-3sBgrW6VKIMh6irVZ7BCF384pUQAlhD+4m5yqXdKRxfX7rxKe5qp+yFM0a7AEo6bU0Pc/NK7+7daHZgctpZeFA==}
-    engines: {node: '>=20'}
-    peerDependencies:
-      satteri: ^0.9.5
-
   satteri-callouts@1.0.1:
     resolution: {integrity: sha512-hLbcd5HXbZ+8dHZKlYhetHVORwqdBGdSDwy07YYC6Pddb3p7P4UScduR+QNHkv3cPWL/zlPigf/lZwrrzJbamw==}
     engines: {node: '>=18.0.0'}
@@ -2170,12 +2167,6 @@ packages:
     engines: {node: '>=22.12.0'}
     peerDependencies:
       satteri: '>=0.9.5 <1'
-
-  satteri-katex@0.1.1:
-    resolution: {integrity: sha512-65M00JZKW145vEhvCFWCe0Gd57hzL8KEDQHbJ9ZvuH4FGrgh90KUPxqS8GCnIEC5EIhOfWPP7NbEnBfFn+nf3w==}
-    engines: {node: '>=20'}
-    peerDependencies:
-      satteri: ^0.9.5
 
   satteri@0.10.5:
     resolution: {integrity: sha512-Ao1LKpAEa9Wdg0otgbVKViZHEq9ebdXe4DMrp3s9vQAU0HNIuHnFEuMuOcm0ZIXyV0Yzxj91NvhLpvXZJO/5ZQ==}
@@ -3511,6 +3502,8 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
+  '@types/katex@0.16.8': {}
+
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.3
@@ -3754,7 +3747,7 @@ snapshots:
 
   commander@11.1.0: {}
 
-  commander@8.3.0: {}
+  commander@15.0.0: {}
 
   common-ancestor-path@2.0.0: {}
 
@@ -4064,9 +4057,9 @@ snapshots:
 
   jsonc-parser@3.3.1: {}
 
-  katex@0.16.47:
+  katex@0.19.0:
     dependencies:
-      commander: 8.3.0
+      commander: 15.0.0
 
   kleur@4.1.5: {}
 
@@ -4419,10 +4412,6 @@ snapshots:
       '@rolldown/binding-win32-arm64-msvc': 1.2.14
       '@rolldown/binding-win32-x64-msvc': 1.2.14
 
-  satteri-autolink-headings@0.1.1(satteri@0.10.5):
-    dependencies:
-      satteri: 0.10.5
-
   satteri-callouts@1.0.1(satteri@0.10.5):
     dependencies:
       hast-util-from-html: 2.0.3
@@ -4431,11 +4420,6 @@ snapshots:
 
   satteri-imgattr@0.1.1(satteri@0.10.5):
     dependencies:
-      satteri: 0.10.5
-
-  satteri-katex@0.1.1(satteri@0.10.5):
-    dependencies:
-      katex: 0.16.47
       satteri: 0.10.5
 
   satteri@0.10.5:
