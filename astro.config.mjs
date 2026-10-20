@@ -9,6 +9,7 @@ import astroExpressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import satteriCallouts from "satteri-callouts";
 import imgAttr from "satteri-imgattr";
+import satteriAutolinkHeadings from "@/plugins/satteri-autolink-headings";
 import satteriKatex from "@/plugins/satteri-katex";
 import satteriTableWrapper from "@/plugins/satteri-table-processor";
 
@@ -52,7 +53,12 @@ export default defineConfig({
   ],
   markdown: {
     processor: satteri({
-      hastPlugins: [satteriTableWrapper, imgAttr(), satteriCallouts()],
+      hastPlugins: [
+        satteriTableWrapper,
+        imgAttr(),
+        satteriCallouts(),
+        satteriAutolinkHeadings(),
+      ],
       mdastPlugins: [satteriKatex()],
       features: {
         gfm: true,

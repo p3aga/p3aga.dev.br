@@ -239,6 +239,16 @@
         }
       }
 
+      &:is(.anchor-link) {
+        text-decoration: none;
+        opacity: 0.2;
+        transition: opacity 250ms ease;
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+
       &:is(.footnotes) {
         border-top: 1px solid var(--prose-border-color);
         padding-top: --spacing(6);
