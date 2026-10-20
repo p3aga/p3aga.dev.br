@@ -1,12 +1,15 @@
 ---
 import { getEntry, render } from "astro:content";
+import PostPreview from "@/components/blog/PostPreview.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getOrderedBlogPosts } from "@/scripts/blog";
 
 const entry = await getEntry("pages", "index");
 if (!entry) {
   throw new Error("Index page not found (file: src/content/pages/index.md)");
 }
 const { Content } = await render(entry);
+const recentPosts = (await getOrderedBlogPosts()).slice(0, 5);
 ---
 
 <BaseLayout
@@ -14,7 +17,15 @@ const { Content } = await render(entry);
   description={entry.data.description}
   >
   <article class="prose">
-    <h1 class="sr-only">{entry.data.title}</h1>
+    <h1 class="text-2xl font-bold">Olá!</h1>
     <Content />
   </article>
+  { recentPosts.length > 0 && (
+    <div class="mt-8">
+      <h2 class="text-2xl font-bold">Posts recentes</h2>
+      <div>
+        {recentPosts.map(post => <PostPreview post={post} />)}
+      </div>
+    </div>
+  )}
 </BaseLayout>
