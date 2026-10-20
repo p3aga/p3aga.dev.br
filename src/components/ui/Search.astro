@@ -153,14 +153,27 @@ import { Icon } from "astro-icon/components";
     }
   });
 
+  searchModal?.addEventListener('close', () => {
+    document.body.classList.toggle("overflow-hidden");
+    searchKeys?.classList.add('hidden');
+  });
+
+  searchModal?.addEventListener('click', (event) => {
+    const rect = searchModal?.getBoundingClientRect();
+
+    if (
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom
+    ) {
+      searchModal?.close();
+    }
+  });
+
   if (process.env.NODE_ENV === "production") {
     const dynamicImport = new Function('url', 'return import(url)');
     const pagefind = await dynamicImport('/pagefind/pagefind.js');
-
-    searchModal?.addEventListener('close', () => {
-      document.body.classList.toggle("overflow-hidden");
-      searchKeys?.classList.add('hidden');
-    });
 
     const renderResults = (results: any[]) => {
       if (!searchResults || !template) return;
