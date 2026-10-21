@@ -1,5 +1,6 @@
 @layer components {
   .prose {
+    font-family: var(--font-serif);
     font-size: var(--text-base);
     line-height: --spacing(7);
     --prose-base-color: var(--color-green-900);
@@ -8,12 +9,8 @@
     --prose-bg-soft-color: oklch(from var(--prose-base-color) l c h / 0.1);
 
     & :where(*):not(.not-prose, .not-prose *) {
-      &:is(h1, h2, h3, h4, h5, h6) {
-        font-family: var(--font-serif);
-      }
-
       &:is(h1) {
-        font-size: var(--text-4xl);
+        font-size: var(--text-3xl);
         line-height: --spacing(10);
         margin-top: 0;
         margin-bottom: --spacing(8);
@@ -41,30 +38,23 @@
         line-height: --spacing(8);
         margin-top: --spacing(8);
         margin-bottom: --spacing(3);
-        font-weight: var(--font-weight-semibold);
+        font-weight: var(--font-weight-bold);
 
         & strong {
-          font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-extrabold);
         }
       }
 
-      &:is(h4) {
+      &:is(h4, h5, h6) {
         font-size: var(--text-base);
         line-height: --spacing(6);
         margin-top: --spacing(6);
         margin-bottom: --spacing(2);
-        font-weight: var(--font-weight-semibold);
+        font-weight: var(--font-weight-bold);
 
         & strong {
-          font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-extrabold);
         }
-      }
-
-      &:is(h5, h6) {
-        font-size: var(--text-base);
-        margin-top: --spacing(6);
-        margin-bottom: --spacing(2);
-        font-weight: var(--font-weight-semibold);
       }
 
       &:is(p) {
@@ -84,7 +74,6 @@
 
       &:is(em, blockquote) {
         font-style: italic;
-        font-family: var(--font-serif);
       }
 
       &:is(blockquote) {

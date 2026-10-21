@@ -29,7 +29,7 @@ const hasContent = page.total > 0;
 
 <BaseLayout title="Posts" description={`${siteConfig.SiteName} Blog posts - page ${page.currentPage}`} nodata={!hasContent}>
   <section class:list={[`${page.url.prev} ? 'mb-10' : ''`, 'relative']}>
-    <h1 class="font-serif text-4xl font-extrabold leading-10 mt-0 mb-8">
+    <h1 class="font-serif text-3xl font-extrabold leading-10 mt-0 mb-8">
       Posts
     </h1>
     <div>

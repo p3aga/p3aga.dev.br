@@ -5,7 +5,7 @@ import siteConfig from "@/site.config";
 
 <footer class="flex flex-col justify-center items-center mt-15 mb-5 gap-3 sm:flex-row sm:justify-between">
   <div class="text-base font-serif text-medium">
-    <small>Copyright © {siteConfig.Author.Name} {siteConfig.Author.Year}</small>
+    <small><span class="font-title font-bold">{siteConfig.SiteName}</span> © {siteConfig.Author.Year} {siteConfig.Author.Name}</small>
   </div>
   <div class="flex items-center gap-3">
     {siteConfig.UserLinks.map((link) => (

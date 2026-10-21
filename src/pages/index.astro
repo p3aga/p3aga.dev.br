@@ -17,12 +17,12 @@ const recentPosts = (await getOrderedBlogPosts()).slice(0, 5);
   description={entry.data.description}
   >
   <article class="prose">
-    <h1 class="text-2xl font-bold">Olá!</h1>
+    <h1>DevOps & Cia</h1>
     <Content />
   </article>
   { recentPosts.length > 0 && (
     <div class="mt-8">
-      <h2 class="text-2xl font-bold">Posts recentes</h2>
+      <h2 class="text-2xl font-serif font-bold">Posts recentes</h2>
       <div>
         {recentPosts.map(post => <PostPreview post={post} />)}
       </div>

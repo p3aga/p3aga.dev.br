@@ -33,7 +33,7 @@ const { tag } = Astro.params;
 
 <BaseLayout title={`Posts de ${tag}`} description={`${siteConfig.SiteName} Blog posts de ${tag} - page ${page.currentPage}`}>
   <section class:list={[`${page.url.prev} ? 'mb-10' : ''`, 'relative']}>
-    <h1 class="font-serif text-4xl font-extrabold leading-10 mt-0 mb-8">
+    <h1 class="font-serif text-3xl font-extrabold leading-10 mt-0 mb-8">
       Tag: {tag}
     </h1>
     <div>
