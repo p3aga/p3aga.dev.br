@@ -74,5 +74,19 @@ export default defineConfig({
     enabled: false,
   },
   output: "static",
-  integrations: [astroExpressiveCode(), mdx(), icon(), sitemap()],
+  integrations: [
+    astroExpressiveCode(),
+    mdx(),
+    icon(),
+    sitemap({
+      filter: (page) => {
+        return (
+          !page.includes('/page/') &&
+          !page.includes('/tags/') &&
+          !page.includes('/projects/page/') &&
+          !page.includes('/projects/tags/')
+        )
+      }
+    })
+  ],
 });

@@ -34,7 +34,7 @@ const { tag } = Astro.params;
 <BaseLayout title={`Posts de ${tag}`} description={`${siteConfig.SiteName} Postgres posts de ${tag} - page ${page.currentPage}`}>
   <section class:list={[`${page.url.prev} ? 'mb-10' : ''`, 'relative']}>
     <h1 class="font-serif text-3xl font-extrabold leading-10 mt-0 mb-8">
-      Tag: {tag}
+      Projetos de #{tag}
     </h1>
     <div>
       {page.data.map((post) => <PostPreview post={post} />)}
