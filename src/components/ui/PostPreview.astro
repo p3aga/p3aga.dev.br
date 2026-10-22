@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  post: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+}
+
+const { post } = Astro.props;
+
+const tags = post.data.tags || undefined;
+
+const isBlog = post.collection === "blog";
+---
+
+<article class="@container/post-preview my-5">
+  <a href={`/${post.collection}/${post.id}`} class="transition-opacity duration-200 hover:opacity-70">
+    <div class="@md/post-preview:flex @md/post-preview:items-center @md/post-preview:gap-4">
+      <h3 class="text-base font-serif font-bold whitespace-nowrap text-ellipsis overflow-hidden">
+        { post.data.title } {post.data.draft && "(Rascunho)"}
+      </h3>
+      <div class="flex-1 border-t opacity-30 @max-md/post-preview:hidden"></div>
+      {isBlog && (
+        <div class="@max-md/post-preview:hidden">
+          <time datetime={post.data.pubDate.toISOString()} class="opacity-50 font-mono text-sm">
+            {post.data.pubDate.toLocaleDateString()}
+          </time>
+        </div>
+      )}
+    </div>
+    <div class="text-sm font-medium opacity-50">
+      { post.data.description }
+    </div>
+  </a>
+  <div class="whitespace-nowrap text-ellipsis overflow-hidden">
+    {isBlog && (
+      <div class:list={[
+        "hidden",
+        "me-1",
+        `${tags ? "after:content-['-']" : ""}`,
+        "after:opacity-50",
+        "@max-md/post-preview:inline"
+      ]}>
+        <time datetime={post.data.pubDate.toISOString()} class="opacity-50 text-sm">
+          {post.data.pubDate.toLocaleDateString()}
+        </time>
+      </div>
+    )}
+    {tags && (
+      tags.map(tag => (
+      <a
+        href={isBlog ? `/tags/${tag}` : `/projects/tags/${tag}`}
+        class="font-mono text-sm me-2 font-medium inline transition-opacity duration-200 hover:opacity-70"
+      >
+        #{ tag }
+      </a>
+      ))
+    )}
+  </div>
+</article>

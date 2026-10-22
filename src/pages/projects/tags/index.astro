@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getTagsWithCountPostsByTag } from "@/scripts/projects";
+import siteConfig from "@/site.config";
+
+const tags = await getTagsWithCountPostsByTag();
+
+const hasContent = tags.length > 0;
+---
+
+<BaseLayout title="Tags" description={`${siteConfig.SiteName} Blog tags`} nodata={!hasContent}>
+  <section>
+    <h1 class="font-serif text-3xl font-extrabold leading-10 mt-0 mb-8">
+      Tags
+    </h1>
+    <div class="ps-2">
+      {tags.map(tag => (
+        <div class="mb-1">
+          <a href={`/projects/tags/${tag.name}`}>
+            <b class="font-mono font-semibold me-1">#{tag.name}</b>
+            <span class="opacity-50 text-xs">{tag.postCount} posts</span>
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

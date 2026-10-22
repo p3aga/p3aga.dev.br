@@ -6,9 +6,12 @@ export interface Props {
     name: string;
     postCount: number;
   }[];
+  collection?: "blog" | "projects" | (string & {});
 }
 
-const { tags } = Astro.props;
+const { tags, collection = "blog" } = Astro.props;
+
+const base_resource = collection === "blog" ? "/tags" : "/projects/tags";
 ---
 
 {tags.length > 0 && (
@@ -20,7 +23,7 @@ const { tags } = Astro.props;
       <ul>
         {tags.map(tag => (
           <li class="mb-1 cursor-pointer">
-            <a href={`/tags/${tag.name}/`}>
+            <a href={`${base_resource}/${tag.name}`}>
               <b class="font-mono font-semibold me-1">#{tag.name}</b>
               <span class="opacity-50 text-xs">{tag.postCount} posts</span>
             </a>
@@ -29,7 +32,7 @@ const { tags } = Astro.props;
       </ul>
     </div>
     <div class="pt-1">
-      <a href="/tags" class="font-serif text-sm font-base">
+      <a href={base_resource} class="font-serif text-sm font-base">
         Ver todas as tags <Icon name="ui/move-right" class="inline-block" />
       </a>
     </div>

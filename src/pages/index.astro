@@ -1,6 +1,6 @@
 ---
 import { getEntry, render } from "astro:content";
-import PostPreview from "@/components/blog/PostPreview.astro";
+import PostPreview from "@/components/ui/PostPreview.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getOrderedBlogPosts } from "@/scripts/blog";
 
@@ -17,7 +17,10 @@ const recentPosts = (await getOrderedBlogPosts()).slice(0, 5);
   description={entry.data.description}
   >
   <article class="prose">
-    <h1>DevOps & Cia</h1>
+    <div class="mb-8">
+      <h1 class="text-2xl mb-0">{entry.data.title}</h1>
+      <span class="text-sm opacity-70">{entry.data.description}</span>
+    </div>
     <Content />
   </article>
   { recentPosts.length > 0 && (

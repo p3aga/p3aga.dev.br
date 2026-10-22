@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import PageToggle from "@/components/ui/PageToggle.astro";
+import PostPreview from "@/components/ui/PostPreview.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getAllTags, getProjectPosts } from "@/scripts/projects";
+import siteConfig from "@/site.config";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allPostsByDate = await getProjectPosts();
+  const allTags = await getAllTags();
+
+  return allTags.flatMap((tag) => {
+    const postsByTag = allPostsByDate.filter((post) =>
+      post.data.tags?.includes(tag),
+    );
+
+    return paginate(postsByTag, {
+      pageSize: 10,
+      params: { tag },
+    });
+  });
+};
+
+export interface Props {
+  page: Page<CollectionEntry<"projects">>;
+}
+
+const { page } = Astro.props;
+const { tag } = Astro.params;
+---
+
+<BaseLayout title={`Posts de ${tag}`} description={`${siteConfig.SiteName} Postgres posts de ${tag} - page ${page.currentPage}`}>
+  <section class:list={[`${page.url.prev} ? 'mb-10' : ''`, 'relative']}>
+    <h1 class="font-serif text-3xl font-extrabold leading-10 mt-0 mb-8">
+      Tag: {tag}
+    </h1>
+    <div>
+      {page.data.map((post) => <PostPreview post={post} />)}
+    </div>
+    <PageToggle page={ page } />
+  </section>
+</BaseLayout>
