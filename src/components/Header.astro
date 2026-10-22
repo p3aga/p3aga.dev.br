@@ -26,7 +26,7 @@ const siteURL = Astro.site ?? new URL(Astro.url.origin);
       <span class="hidden mx-1 sm:block">|</span>
       <Search />
       <ThemeToggle />
-      <button id="mobileMenuBtn" type="button" class="cursor-pointer sm:hidden">
+      <button id="mobileMenuBtn" aria-label="Menu" type="button" class="cursor-pointer sm:hidden">
         <Icon name="ui/menu" class="text-xl"/>
       </button>
       <div id="mobileMenu" class="hidden fixed bg-green-50 text-green-900 inset-0 dark:bg-green-950 dark:text-green-50">
