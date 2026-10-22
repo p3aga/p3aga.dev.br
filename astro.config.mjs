@@ -80,11 +80,12 @@ export default defineConfig({
     icon(),
     sitemap({
       filter: (page) => {
+        console.log(page)
+        const re = /\/(projects|blog)\/page\/\d+|\/tags(\/|$)/i;
+        console.log(!re.test(page));
         return (
-          !page.includes('/page/') &&
-          !page.includes('/tags/') &&
-          !page.includes('/projects/page/') &&
-          !page.includes('/projects/tags/')
+          !page.includes('page')
+          && !page.includes('tags')
         )
       }
     })

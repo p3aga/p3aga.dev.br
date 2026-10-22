@@ -9,7 +9,7 @@ const uiIcons = [
 ---
 
 <div class="static sm:relative">
-  <button id="themeIcon" class="flex items-center cursor-pointer" type="button">
+  <button id="themeIcon" aria-label="Theme Toggle" class="flex items-center cursor-pointer" type="button">
     {uiIcons.map((icon) => (
       <Icon name={`ui/${icon.name}`} class="text-xl hidden" data-theme={icon.id}/>
     ))}

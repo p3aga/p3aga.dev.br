@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<button id="openSearchModal" class="flex items-center cursor-pointer" type="button">
+<button id="openSearchModal" aria-label="Search" class="flex items-center cursor-pointer" type="button">
   <Icon name="ui/search" class="text-xl" />
 </button>
 <dialog id="searchModal" class="m-auto mt-8 w-full max-h-[80dvh] overflow-hidden rounded-md bg-green-50 text-green-900 open:flex open:flex-col focus:outline-hidden backdrop:bg-neutral-900/50 sm:w-lg dark:bg-neutral-800 dark:text-neutral-50">
