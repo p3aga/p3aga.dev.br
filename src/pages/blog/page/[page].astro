@@ -24,7 +24,8 @@ const { page } = Astro.props;
 
 const tags = await getMoreTags();
 
-const hasContent = page.total > 0;
+// const hasContent = page.total > 0;
+const hasContent = false;
 ---
 
 <BaseLayout title="Posts" description={`${siteConfig.SiteName} Blog posts - page ${page.currentPage}`} nodata={!hasContent}>
